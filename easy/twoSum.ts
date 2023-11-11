@@ -37,10 +37,12 @@ function twoSum(nums: number[], target: number): number[] {
   for (let i = 0; i < nums.length; i++) {
     let value = nums[i];
     let complementPair = target - value;
-    if (map[complementPair] !== undefined) {
+    if (complementPair in map) {
       return [map[complementPair], i];
-    } else {
-      map[value] = i;
     }
+    map[value] = i;
   }
+
+  // Never will hit here
+  return [-1, -1];
 }
