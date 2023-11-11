@@ -33,14 +33,14 @@ function twoSum(nums: number[], target: number): number[] {
   comple = 10 - 9 = 1
   */
 
-  const map = {};
+  const map: Map<number, number> = new Map();
   for (let i = 0; i < nums.length; i++) {
     let value = nums[i];
     let complementPair = target - value;
-    if (complementPair in map) {
-      return [map[complementPair], i];
+    if (map.has(complementPair)) {
+      return [map.get(complementPair), i];
     }
-    map[value] = i;
+    map.set(value, i);
   }
 
   // Never will hit here
