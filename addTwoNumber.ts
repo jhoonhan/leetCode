@@ -7,15 +7,28 @@ class ListNode {
   }
 }
 
+// function getNumberFromList(list: ListNode): number {
+//   let numberString = "";
+
+//   let runner: ListNode | null = list;
+//   while (runner) {
+//     numberString = runner.val.toString() + numberString;
+//     runner = runner.next;
+//   }
+//   return Number(numberString);
+// }
+
 function getNumberFromList(list: ListNode): number {
-  let numberString = "";
+  let output = 0;
+  let index = 0;
 
   let runner: ListNode | null = list;
   while (runner) {
-    numberString = runner.val.toString() + numberString;
+    output = runner.val * Math.pow(10, index) + output;
     runner = runner.next;
+    index++;
   }
-  return Number(numberString);
+  return output;
 }
 
 function addTwoNumbers(l1: ListNode, l2: ListNode): ListNode {
