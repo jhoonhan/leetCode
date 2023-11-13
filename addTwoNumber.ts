@@ -7,7 +7,7 @@ class ListNode {
   }
 }
 
-function getNumberFromList(list: ListNode): number {
+function getNumberFromList(list: ListNode): bigint {
   let numberString = "";
 
   let runner: ListNode | null = list;
@@ -15,7 +15,7 @@ function getNumberFromList(list: ListNode): number {
     numberString = runner.val.toString() + numberString;
     runner = runner.next;
   }
-  return Number(numberString);
+  return BigInt(numberString);
 }
 
 // function getNumberFromList(list: ListNode): number {
