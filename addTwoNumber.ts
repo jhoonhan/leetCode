@@ -7,46 +7,67 @@ class ListNode {
   }
 }
 
-function getNumberFromList(list: ListNode): bigint {
-  let numberString = "";
-
-  let runner: ListNode | null = list;
-  while (runner) {
-    numberString = runner.val.toString() + numberString;
-    runner = runner.next;
-  }
-  return BigInt(numberString);
-}
-
-// function getNumberFromList(list: ListNode): number {
-//   let output = 0;
-//   let index = 0;
+// function getNumberFromList(list: ListNode): bigint {
+//   let numberString = "";
 
 //   let runner: ListNode | null = list;
 //   while (runner) {
-//     output += runner.val * Math.pow(10, index);
+//     numberString = runner.val.toString() + numberString;
 //     runner = runner.next;
-//     index++;
 //   }
-//   return output;
+//   return BigInt(numberString);
+// }
+
+// function addTwoNumbers(l1: ListNode, l2: ListNode): ListNode {
+//   const n1 = getNumberFromList(l1);
+//   const n2 = getNumberFromList(l2);
+//   const sum = (n1 + n2).toString();
+
+//   let output: ListNode | null = null;
+
+//   for (let i = 0; i < sum.length; i++) {
+//     const digit = sum[i];
+//     3;
+
+//     output = new ListNode(Number(digit), output);
+//   }
+
+//   return output as ListNode;
 // }
 
 function addTwoNumbers(l1: ListNode, l2: ListNode): ListNode {
-  const n1 = getNumberFromList(l1);
-  123;
-  const n2 = getNumberFromList(l2);
-  234;
-  const sum = (n1 + n2).toString();
-  357;
+  let r1: ListNode | null = l1;
+  let r2: ListNode | null = l2;
+  const output: ListNode = new ListNode();
+  let runner: ListNode | null = output;
 
-  let output: ListNode | null = null;
+  while (r1 || r2) {
+    let digit = (r1?.val || 0) + (r2?.val || 0);
+    if (digit >= 10) {
+      digit -= 10;
 
-  for (let i = 0; i < sum.length; i++) {
-    const digit = sum[i];
-    3;
-
-    output = new ListNode(Number(digit), output);
+      if (r1?.next) {
+        r1.next.val++;
+      } else if (r2?.next) {
+        r2.next.val++;
+      } else if (r1) {
+        r1.next = new ListNode(1);
+      } else if (r2) {
+        r2.next = new ListNode(1);
+      }
+    }
+    runner.val = digit;
+    if (r1?.next || r2?.next) {
+      runner.next = new ListNode();
+      runner = runner.next;
+    }
+    if (r1) {
+      r1 = r1.next;
+    }
+    if (r2) {
+      r2 = r2.next;
+    }
   }
 
-  return output as ListNode;
+  return output;
 }
