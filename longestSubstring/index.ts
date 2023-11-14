@@ -14,9 +14,7 @@ function lengthOfLongestSubstring(s: string): number {
     }
   }
 
-  const result = Math.max(longestCount, str.length);
-
-  return result;
+  return Math.max(longestCount, str.length);
 }
 
 lengthOfLongestSubstring("");
