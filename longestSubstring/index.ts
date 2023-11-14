@@ -1,30 +1,24 @@
 function lengthOfLongestSubstring(s: string): number {
   let str = "";
-  let previousCount: number = 0;
-  let longestCount: number = 0;
+  let longestCount = 0;
 
+  // O(n)
   for (let i = 0; i < s.length; i++) {
     if (!str.includes(s[i])) {
       str += s[i];
-      previousCount += 1;
     } else {
-      if (previousCount > longestCount) {
-        longestCount = previousCount;
+      if (str.length > longestCount) {
+        longestCount = str.length;
       }
-
-      const charIndex = str.indexOf(s[i]);
-      str = str.slice(charIndex + 1) + s[i];
-      console.log(str);
-      previousCount = str.length;
+      str = str.slice(str.indexOf(s[i]) + 1) + s[i];
     }
   }
 
-  const result = Math.max(longestCount, previousCount);
-  console.log(result);
+  const result = Math.max(longestCount, str.length);
 
   return result;
 }
 
-lengthOfLongestSubstring(" ");
+lengthOfLongestSubstring("");
 // const aang = "01234566789";
 // console.log(aang.slice(1));
