@@ -15,7 +15,6 @@ class Solution
         for ($i = 0; $i < strlen($s); $i++) {
             if (!str_contains($str, $s[$i])) {
                 $str .= $s[$i];
-//                echo("$str <br>");
             } else {
                 if (strlen($str) > $longestCount) {
                     $longestCount = strlen($str);
@@ -25,7 +24,6 @@ class Solution
             }
         }
         $result = max($longestCount, strlen($str));
-        echo $result;
         return $result;
     }
 }
