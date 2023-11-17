@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 class Solution
 {
@@ -10,25 +12,18 @@ class Solution
      */
     function removeElement(&$nums, $val)
     {
-//        var_dump($nums);
-//        echo("<br>");
-//        echo("$val<br>");
-
-        $count = count($nums);
-
+        $k = 0;
         for ($i = 0; $i < count($nums); $i++) {
-            if ($nums[$i] == $val) {
-                unset($nums[$i]);
-                $nums[$i] = "_";
-                $count -= 1;
+            if ($nums[$i] !== $val) {
+                $nums[$k] = $nums[$i];
+                $k++;
             }
         }
-        unset($nums['_']);
 
-        return $count;
+        return $k;
     }
 }
 
 $solution = new Solution();
-$input = [3, 2, 2, 3];
+$input = [3, 2, 2, 3, 3];
 $solution->removeElement($input, 3);
