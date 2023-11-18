@@ -38,7 +38,7 @@ function twoSum(nums: number[], target: number): number[] {
     let value = nums[i];
     let complementPair = target - value;
     if (map.has(complementPair)) {
-      return [map.get(complementPair), i];
+      return [map.get(complementPair, i)];
     }
     map.set(value, i);
   }
