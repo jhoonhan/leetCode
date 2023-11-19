@@ -4,15 +4,15 @@ function majorityElement(nums: number[]): number {
   let result = 0;
 
   for (let i = 0; i < nums.length; i++) {
-    const count = hashmap.get(i) + 1;
-    hashmap.set(1, count);
+    const mapCount = hashmap.get(nums[i]) + 1;
+    const count = Number.isNaN(mapCount) ? 1 : mapCount;
+    hashmap.set(nums[i], count);
     if (count > largest) {
       largest = count;
-      result = i;
+      result = nums[i];
     }
   }
-
   return result;
 }
 
-majorityElement([3, 2, 3]);
+majorityElement([1]);
