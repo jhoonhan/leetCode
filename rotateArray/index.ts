@@ -12,9 +12,7 @@ function rotate(nums: number[], k: number): void {
   // for (let i = 0; i < nums.length; i++) {}
   //
   // Solution 3: fastest
-  // k = k % nums.length;
-  console.log(k);
-  console.log(k % nums.length);
+  k = k % nums.length;
 
   let l = 0;
   let r = nums.length - 1;
@@ -33,6 +31,7 @@ function rotate(nums: number[], k: number): void {
   l = k;
   r = nums.length - 1;
   nums = reverseArr(nums, l, r);
+  console.log(nums);
 }
 
 function reverseArr(nums: number[], l: number, r: number): number[] {
@@ -47,4 +46,4 @@ function reverseArr(nums: number[], l: number, r: number): number[] {
   return nums;
 }
 
-rotate([-1, 1, 3], 7);
+rotate([1, 2, 3, 4, 5], 7);
