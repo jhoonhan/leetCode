@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 class Solution
 {
+  // For loop
   /**
    * @param int[] $prices
    * @return int
@@ -17,6 +18,28 @@ class Solution
       } else {
         $p += $prices[$i + 1] - $prices[$i];
       }
+    }
+    return $p;
+  }
+  // While loop
+
+  /**
+   * @param int[] $prices
+   * @return Integer
+   */
+  function maxProfit2($prices)
+  {
+    $l = 0;
+    $r = 1;
+    $p = 0;
+    while ($r < count($prices)) {
+      if ($prices[$l] > $prices[$r]) {
+        $p += 0;
+      } else {
+        $p += $prices[$r] - $prices[$l];
+      }
+      $l++;
+      $r++;
     }
     return $p;
   }
