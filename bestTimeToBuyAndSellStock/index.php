@@ -7,23 +7,27 @@ class Solution
 
   function maxProfit(array $prices): int
   {
-    $lowest = 10;
+    $lowest = $prices[0];
     $prev = 0;
     $maxProfit = 0;
     for ($i = 0; $i < count($prices); $i++) {
+      // echo ("$prices[$i] <br>");
+
       if ($prices[$i] < $lowest) {
         $lowest = $prices[$i];
-      } else {
-        if ($prices[$i] >= $prev) {
+        $prev = 0;
+      } else if ($prices[$i] >= $prev) {
+        if ($prices[$i] - $lowest > $maxProfit) {
           $maxProfit = $prices[$i] - $lowest;
-          $prev = $prices[$i];
         }
+        $prev = $prices[$i];
       }
     }
+    echo ($maxProfit);
 
     return $maxProfit;
   }
 }
 
 $solution = new Solution();
-$solution->maxProfit([2, 1, 2, 1, 0, 1, 2]);
+$solution->maxProfit([11, 7, 4, 2, 1]);
