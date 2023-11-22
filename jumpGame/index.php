@@ -8,38 +8,24 @@ class Solution
    */
   function canJump($nums)
   {
-    $goal = count($nums);
-    $i = 0;
+    $goal = count($nums) - 1;
 
-    while ($i < count($nums)) {
-      $slicedArray = array_slice($nums, $i + 1, $nums[$i]);
-      $goal = count(array_slice($nums, $i + 1));
-      if (count($nums) === 1) {
-        return true;
+    for ($i = count($nums) - 1; $i >= 0; $i--) {
+      echo ("Index: $i | Num: $nums[$i] | Total: $i + $nums[$i] | Goal: $goal <br>");
+      if ($i + $nums[$i] >= $goal) {
+        $goal = $i;
       }
+    }
+    echo ("Final goal: $goal");
 
-      if (count($slicedArray) === 0) {
-        echo ('fail');
-        return false;
-      }
-      if ($nums[$i] >= $goal) {
-        echo ('pass');
-        return true;
-      }
-      $max = max($slicedArray);
-      $indeces = array_keys($nums, $max);
-      $maxIndex = end($indeces);
-      echo ($maxIndex);
-
-
-
-
-
-      $i = $maxIndex;
+    if ($goal === 0) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
 
 
 $solution = new Solution();
-$solution->canJump([1, 1, 1, 1]);
+$solution->canJump([3, 1, 0, 1, 4]);
