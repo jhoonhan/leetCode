@@ -9,23 +9,38 @@ class Solution
   function jump($nums)
   {
     $goal = count($nums) - 1;
+    $count = 0;
+    $i = count($nums) - 1;
+    $potential = 0;
 
-    for ($i = count($nums) - 1; $i >= 0; $i--) {
-      echo ("Index: $i | Num: $nums[$i] | Total: $i + $nums[$i] | Goal: $goal <br>");
-      if ($i + $nums[$i] >= $goal) {
-        $goal = $i;
+    while ($i > 1) {
+      for ($j = $i; $j > 0; $j--) {
+        if ($nums[$j] + $j >= $i) {
+          $potential = $j;
+          echo ("Updated Poten: $potential | $nums[$potential]<br>");
+        }
+        $i = $potential;
+        echo ("Updated i: $i<br>");
       }
+      $count++;
     }
-    echo ("Final goal: $goal");
+    echo ("Count: $count");
 
-    if ($goal === 0) {
-      return true;
-    } else {
-      return false;
-    }
+
+
+
+
+
+    // if ($goal === 0) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    return $count;
   }
 }
 
 
 $solution = new Solution();
-$solution->jump([3, 1, 2, 1, 4]);
+$solution->jump([2, 3, 1, 1, 4]);
+// $solution->jump([1, 1, 1, 1]);
