@@ -27,9 +27,7 @@ class Solution
         return true;
       }
       $max = max($slicedArray);
-      $sofararr = array_slice($nums, 0, $i);
-      var_dump($sofararr);
-      $indeces = array_keys($sofararr, $max);
+      $indeces = array_keys($nums, $max);
       $maxIndex = end($indeces);
       echo ($maxIndex);
 
