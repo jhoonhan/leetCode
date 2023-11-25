@@ -7,41 +7,68 @@ class Solution
    * @param Integer[] $citations
    * @return Integer
    */
+  // Works but slow
+  // function hIndex($citations)
+  // {
+  //   $count = max($citations);
+  //   $h = 0;
+  //   for ($i = $count; $i > 0; $i--) {
+  //     $elig = 0;
+  //     foreach ($citations as $key) {
+  //       if ($key >= $i) {
+  //         $elig++;
+  //       }
+  //     }
+  //     if ($i <= $elig) {
+  //       $temp = min($i, $elig);
+  //       $h = max($h, $temp);
+  //     }
+  //   }
+
+  //   return $h;
+  // }
+
+
+  ////////
+  // Binary search
   function hIndex($citations)
   {
-    // 6
-    $count = max($citations);
-    $h = 0;
-    for ($i = $count; $i > 0; $i--) {
-      // echo ("Checking with index h: $i");
-      // echo ('<br>');
-      $elig = 0;
-      foreach ($citations as $key) {
-        if ($key >= $i) {
-          $elig++;
-          // echo ("$key eligible.");
+    sort($citations);
+    print_r($citations);
 
-          // echo (" Updating Eligible to: $elig");
-          // echo ('<br>');
-        }
-      }
-      // echo ("Checking h: $i | $elig");
-      // echo ('<br>');
-      if ($i <= $elig) {
-        $temp = min($i, $elig);
-        $h = max($h, $temp);
-        // echo ("H updated: $h");
-        // echo ('<br>');
+    // check for empty array 
+    if (count($citations) === 0) return false;
+    $low = 0;
+    $high = count($citations) - 1;
+    $target = 3;
+
+    while ($low <= $high) {
+
+      // compute middle index 
+      $mid = floor(($low + $high) / 2);
+
+
+      // element found at mid 
+      if ($citations[$mid] == $target) {
+        echo ("aaang");
+
+        return true;
       }
 
-      // echo ('<br>');
+      if ($target < $citations[$mid]) {
+        // search the left side of the array 
+        $high = $mid - 1;
+      } else {
+        // search the right side of the array 
+        $low = $mid + 1;
+      }
     }
-    // echo ("ended with $h");
 
-    return $h;
+    // If we reach here element x doesnt exist 
+    return false;
   }
 }
 
 $solution = new Solution();
-$solution->hIndex([1, 3, 1]);
-// $solution->hIndex([3, 0, 6, 1, 5]);
+// $solution->hIndex([1, 3, 1]);
+$solution->hIndex([3, 0, 6, 1, 5]);
