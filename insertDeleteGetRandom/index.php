@@ -1,40 +1,72 @@
-<?
+<?php
+
+declare(strict_types=1);
 class RandomizedSet
 {
-  /**
-   */
+
+  private $set = [];
+
   function __construct()
   {
   }
 
-  /**
-   * @param Integer $val
-   * @return Boolean
-   */
-  function insert($val)
+  function insert(int $val): bool
   {
+    echo ("#### Inserting $val");
+    echo ('<br>');
+
+    if (in_array($val, $this->set)) {
+      echo ("Exists. Returning false");
+      echo ('<br>');
+      print_r($this->set);
+      echo ('<br>');
+      echo ('<br>');
+
+      return false;
+    } else {
+      array_push($this->set, $val);
+      echo ("Doesn't exist. Pushed $val");
+      echo ('<br>');
+      print_r($this->set);
+      echo ('<br>');
+      echo ('<br>');
+      return true;
+    }
   }
 
-  /**
-   * @param Integer $val
-   * @return Boolean
-   */
-  function remove($val)
+
+  function remove(int $val): bool
   {
+    echo ("#### Removing $val");
+    echo ('<br>');
+    if (in_array($val, $this->set)) {
+      echo ("Exists. Removing $val");
+      echo ('<br>');
+      print_r($this->set);
+      echo ('<br>');
+      echo ('<br>');
+      return true;
+    } else {
+      echo ("Does not exsits. Returning False");
+      echo ('<br>');
+      print_r($this->set);
+      echo ('<br>');
+      echo ('<br>');
+      return false;
+    }
   }
 
-  /**
-   * @return Integer
-   */
-  function getRandom()
+
+  function getRandom(): bool
   {
+    return true;
   }
 }
 
-/**
- * Your RandomizedSet object will be instantiated and called as such:
- * $obj = RandomizedSet();
- * $ret_1 = $obj->insert($val);
- * $ret_2 = $obj->remove($val);
- * $ret_3 = $obj->getRandom();
- */
+
+
+$obj = new RandomizedSet();
+$obj->insert(1);
+$obj->insert(1);
+$obj->remove(2);
+$obj->remove(1);
