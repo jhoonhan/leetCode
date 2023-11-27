@@ -4,7 +4,6 @@ declare(strict_types=1);
 class RandomizedSet
 {
 
-  private $set = [];
   private $map = array();
 
   private $index = 0;
@@ -15,25 +14,24 @@ class RandomizedSet
 
   function insert(int $val): bool
   {
-    echo ("#### Inserting $val");
-    echo ('<br>');
+    // echo ("#### Inserting $val");
+    // echo ('<br>');
 
     if (isset($this->map[$val])) {
-      echo ("Exists. Returning: FALSE");
-      echo ('<br>');
-      print_r($this->map);
-      echo ('<br>');
-      echo ('<br>');
+      // echo ("Exists. Returning: FALSE");
+      // echo ('<br>');
+      // print_r($this->map);
+      // echo ('<br>');
+      // echo ('<br>');
 
       return false;
     } else {
-      // array_push($this->set, $val);
-      echo ("Doesn't exist. Adding: $val");
+      // echo ("Doesn't exist. Adding: $val");
       $this->map[$val] = $this->index;
-      echo ('<br>');
-      print_r($this->map);
-      echo ('<br>');
-      echo ('<br>');
+      // echo ('<br>');
+      // print_r($this->map);
+      // echo ('<br>');
+      // echo ('<br>');
       return true;
     }
   }
@@ -41,22 +39,22 @@ class RandomizedSet
 
   function remove(int $val): bool
   {
-    echo ("#### Removing $val");
-    echo ('<br>');
+    // echo ("#### Removing $val");
+    // echo ('<br>');
     if (isset($this->map[$val])) {
-      echo ("Exists. Removing: $val");
+      // echo ("Exists. Removing: $val");
       unset($this->map[$val]);
-      echo ('<br>');
-      print_r($this->map);
-      echo ('<br>');
-      echo ('<br>');
+      // echo ('<br>');
+      // print_r($this->map);
+      // echo ('<br>');
+      // echo ('<br>');
       return true;
     } else {
-      echo ("Does not exsits. Returning: FALSE");
-      echo ('<br>');
-      print_r($this->map);
-      echo ('<br>');
-      echo ('<br>');
+      // echo ("Does not exsits. Returning: FALSE");
+      // echo ('<br>');
+      // print_r($this->map);
+      // echo ('<br>');
+      // echo ('<br>');
       return false;
     }
   }
