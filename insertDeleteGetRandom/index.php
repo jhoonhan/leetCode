@@ -5,6 +5,9 @@ class RandomizedSet
 {
 
   private $set = [];
+  private $map = array();
+
+  private $index = 0;
 
   function __construct()
   {
@@ -15,19 +18,20 @@ class RandomizedSet
     echo ("#### Inserting $val");
     echo ('<br>');
 
-    if (in_array($val, $this->set)) {
-      echo ("Exists. Returning false");
+    if (isset($this->map[$val])) {
+      echo ("Exists. Returning: FALSE");
       echo ('<br>');
-      print_r($this->set);
+      print_r($this->map);
       echo ('<br>');
       echo ('<br>');
 
       return false;
     } else {
-      array_push($this->set, $val);
-      echo ("Doesn't exist. Pushed $val");
+      // array_push($this->set, $val);
+      echo ("Doesn't exist. Adding: $val");
+      $this->map[$val] = $this->index;
       echo ('<br>');
-      print_r($this->set);
+      print_r($this->map);
       echo ('<br>');
       echo ('<br>');
       return true;
@@ -39,17 +43,18 @@ class RandomizedSet
   {
     echo ("#### Removing $val");
     echo ('<br>');
-    if (in_array($val, $this->set)) {
-      echo ("Exists. Removing $val");
+    if (isset($this->map[$val])) {
+      echo ("Exists. Removing: $val");
+      unset($this->map[$val]);
       echo ('<br>');
-      print_r($this->set);
+      print_r($this->map);
       echo ('<br>');
       echo ('<br>');
       return true;
     } else {
-      echo ("Does not exsits. Returning False");
+      echo ("Does not exsits. Returning: FALSE");
       echo ('<br>');
-      print_r($this->set);
+      print_r($this->map);
       echo ('<br>');
       echo ('<br>');
       return false;
@@ -57,9 +62,9 @@ class RandomizedSet
   }
 
 
-  function getRandom(): bool
+  function getRandom(): int
   {
-    return true;
+    return array_rand($this->map);
   }
 }
 
@@ -69,4 +74,12 @@ $obj = new RandomizedSet();
 $obj->insert(1);
 $obj->insert(1);
 $obj->remove(2);
-$obj->remove(1);
+$obj->insert(2);
+$obj->insert(3);
+$obj->remove(3);
+$obj->insert(4);
+$obj->insert(100);
+
+
+// $obj->remove(1);
+$obj->getRandom();
