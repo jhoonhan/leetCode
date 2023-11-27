@@ -33,42 +33,35 @@ class Solution
   // Binary search
   function hIndex($citations)
   {
-    sort($citations);
-    print_r($citations);
+    rsort($citations);
+    $left = 0;
+    $right = count($citations) - 1;
 
-    // check for empty array 
-    if (count($citations) === 0) return false;
-    $low = 0;
-    $high = count($citations) - 1;
-    $target = 3;
-
-    while ($low <= $high) {
-
-      // compute middle index 
-      $mid = floor(($low + $high) / 2);
+    while ($left <= $right) {
+      $mid = $left + floor(($right - $left) / 2);
+      echo ("$left | $mid | $right");
+      echo ('<br>');
 
 
-      // element found at mid 
-      if ($citations[$mid] == $target) {
-        echo ("aaang");
-
-        return true;
-      }
-
-      if ($target < $citations[$mid]) {
-        // search the left side of the array 
-        $high = $mid - 1;
+      if ($citations[$mid] === $mid + 1) {
+        return $mid + 1;
+      } elseif ($mid < $citations[$mid]) {
+        $left = $mid + 1;
+        echo ("Left updated to: $left");
+        echo ('<br>');
       } else {
-        // search the right side of the array 
-        $low = $mid + 1;
+        $right = $mid - 1;
+        echo ("Right updated to: $right");
+        echo ('<br>');
       }
     }
+    echo ("Final left: $left");
+    echo ('<br>');
 
-    // If we reach here element x doesnt exist 
-    return false;
+    return $left;
   }
 }
 
 $solution = new Solution();
 // $solution->hIndex([1, 3, 1]);
-$solution->hIndex([3, 0, 6, 1, 5]);
+$solution->hIndex([100, 100, 100, 100, 4, 0, 0, 0, 0]);
