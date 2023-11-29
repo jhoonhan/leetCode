@@ -11,24 +11,24 @@ class Solution
    */
   function majorityElement($nums)
   {
-    // $map = array();
-    // $largest = 0;
-    // $result = 0;
+    $map = array();
+    $largest = 0;
+    $result = 0;
 
-    // for ($i = 0; $i < count($nums); $i++) {
-    //   $mapCount = 1;
-    //   if (isset($map[$nums[$i]])) {
-    //     $mapCount = $map[$nums[$i]] + 1;
-    //   };
-    //   $map[$nums[$i]] = $mapCount;
+    for ($i = 0; $i < count($nums); $i++) {
+      $mapCount = 1;
+      if (isset($map[$nums[$i]])) {
+        $mapCount = $map[$nums[$i]] + 1;
+      };
+      $map[$nums[$i]] = $mapCount;
 
-    //   if ($mapCount > $largest) {
-    //     $largest = $mapCount;
-    //     $result = $nums[$i];
-    //   }
-    //   // print($mapCount);
-    // }
-    // return $result;
+      if ($mapCount > $largest) {
+        $largest = $mapCount;
+        $result = $nums[$i];
+      }
+      // print($mapCount);
+    }
+    return $result;
 
     $nv = array_count_values($nums);
     arsort($nv);
