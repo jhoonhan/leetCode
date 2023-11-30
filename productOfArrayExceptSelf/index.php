@@ -12,40 +12,30 @@ class Solution
   function productExceptSelf($nums)
   {
     $res = [];
-    $res3 = [];
     $counter = 1;
-    $counter2 = 1;
-    $rNums = array_reverse($nums);
     // change it to while loop maybe
 
-    $i = 0;
-    $j = count($nums) - 1;
-    while ($i < count($nums) && $j >= 0) {
 
+
+    for ($i = 0; $i < count($nums); $i++) {
       if (isset($nums[$i - 1])) {
         $counter = $counter * $nums[$i - 1];
       }
       array_push($res, $counter);
+    }
 
-      if (isset($rNums[$i - 1])) {
-        $counter2 = $counter2 * $rNums[$i - 1];
+    $counter = 1;
+    for ($j = count($nums) - 1; $j >= 0; $j--) {
+      if (isset($nums[$j + 1])) {
+        $counter = $counter * $nums[$j + 1];
       }
-      echo ($counter2);
-      echo ('<br>');
-
-      // $res[$i] = $res[$i] * $res
-      array_push($res3, $res[$i] * $counter2);
-
-      $i++;
-      // $j--;
+      $res[$j] = $res[$j] * $counter;
     }
 
 
-    print_r($res);
-    echo ('<br>');
 
-    print_r($res3);
-    echo ('<br>');
+
+    return $res;
   }
 }
 
