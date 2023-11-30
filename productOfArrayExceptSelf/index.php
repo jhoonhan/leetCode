@@ -27,8 +27,8 @@ class Solution
       }
       array_push($res, $counter);
 
-      if (isset($rNums[$j - 1])) {
-        $counter2 = $counter2 * $rNums[$j - 1];
+      if (isset($rNums[$i - 1])) {
+        $counter2 = $counter2 * $rNums[$i - 1];
       }
       echo ($counter2);
       echo ('<br>');
@@ -37,7 +37,7 @@ class Solution
       array_push($res3, $res[$i] * $counter2);
 
       $i++;
-      $j--;
+      // $j--;
     }
 
 
