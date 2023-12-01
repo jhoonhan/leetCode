@@ -11,19 +11,15 @@ class Solution
    */
   function productExceptSelf($nums)
   {
+    // Works but slow
     $res = [];
     $counter = 1;
-    // change it to while loop maybe
-
-
-
     for ($i = 0; $i < count($nums); $i++) {
       if (isset($nums[$i - 1])) {
         $counter = $counter * $nums[$i - 1];
       }
       array_push($res, $counter);
     }
-
     $counter = 1;
     for ($j = count($nums) - 1; $j >= 0; $j--) {
       if (isset($nums[$j + 1])) {
