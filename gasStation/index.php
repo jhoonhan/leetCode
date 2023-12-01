@@ -12,12 +12,21 @@ class Solution
    */
   function canCompleteCircuit(array $gas, array $cost): int
   {
-    $difference = [];
-    foreach ($gas as $i) {
-      # code...
-      $difference[$i] = $gas[i] - $cost[$i];
+    if (array_sum($gas) < array_sum($cost)) {
+      return -1;
     }
-    print_r($difference);
+
+    $total = 0;
+    $res = 0;
+
+    for ($i = 0; $i < count($gas); $i++) {
+      $total += $gas[$i] - $cost[$i];
+      if ($total < 0) {
+        $total = 0;
+        $res = $i + 1;
+      }
+    }
+    return $res;
 
     return 0;
   }
