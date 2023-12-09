@@ -39,27 +39,25 @@ class Solution
   function check(int $val, string $strVal, bool $autoIterate): void
   {
     $counta = (int) ($val / $this->chars[$strVal]);
-
-    $numVal = $this->chars[$strVal];
-    echo ("$val / $numVal");
-    echo ('<br>');
+    // echo ("$val / $numVal");
+    // echo ('<br>');
 
     if ($counta > 0) {
       if ($autoIterate) {
         for ($i = 0; $i < $counta; $i++) {
           $this->str .= $strVal;
-          $this->remainder -= $numVal;
+          $this->remainder -= $this->chars[$strVal];
         };
       } else {
         $this->str .= $strVal;
-        $this->remainder -= $numVal;
+        $this->remainder -= $this->chars[$strVal];
       }
     }
-    echo ("Checking for $strVal: $numVal");
-    echo ('<br>');
-    echo ("COUNTA: $counta | REMAINDER: $this->remainder");
-    echo ('<br>');
-    echo ('<br>');
+    // echo ("Checking for $strVal: $numVal");
+    // echo ('<br>');
+    // echo ("COUNTA: $counta | REMAINDER: $this->remainder");
+    // echo ('<br>');
+    // echo ('<br>');
   }
 
   function intToRoman(int $num): string
@@ -67,49 +65,9 @@ class Solution
     $this->remainder = $num;
     $alternator = false;
 
-    foreach (array_reverse($this->chars) as $key => $value) {
-      # code...
+    foreach (array_reverse(array_keys($this->chars)) as $key) {
       $this->check($this->remainder, $key, !$alternator);
     }
-
-    // // Check for M (1000s)
-    // $this->check($this->remainder, "M", true);
-
-    // // Check for CM (900s)
-    // $this->check($this->remainder, "CM", false);
-
-    // // Check for D (500s)
-    // $this->check($this->remainder, "D", true);
-
-    // // Check for CD (400s)
-    // $this->check($this->remainder, "CD", false);
-
-    // // Check for C (100s)
-    // $this->check($this->remainder, "C", true);
-
-    // // Check for XC (90s)
-    // $this->check($this->remainder, "XC", false);
-
-    // // Check for XC (50s)
-    // $this->check($this->remainder, "L", true);
-
-    // // Check for XC (40s)
-    // $this->check($this->remainder, "XL", false);
-
-    // // Check for XC (10s)
-    // $this->check($this->remainder, "X", true);
-
-    // // Check for XC (9s)
-    // $this->check($this->remainder, "IX", false);
-
-    // // Check for XC (5s)
-    // $this->check($this->remainder, "V", true);
-
-    // // Check for XC (4s)
-    // $this->check($this->remainder, "IV", false);
-
-    // // Check for XC (1s)
-    // $this->check($this->remainder, "I", true);
 
 
 
