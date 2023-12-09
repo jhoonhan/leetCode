@@ -4,18 +4,13 @@ declare(strict_types=1);
 
 class Solution
 {
-
-
   function lengthOfLastWord(string $s): int
   {
-    $splittedString = explode(" ", $s);
-    print_r($splittedString);
-
-
-    return 0;
+    $splittedString = explode(' ', trim($s));
+    return strlen(end($splittedString));
   }
 }
 
 
 $solution = new Solution();
-$solution->lengthOfLastWord("aaang 12345");
+$solution->lengthOfLastWord("   fly me   to   the moon  ");
