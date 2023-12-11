@@ -6,6 +6,7 @@ class Solution
 {
   function strStr(string $haystack, string $needle): int
   {
+    // O(n^2)
     for ($i = 0; $i < strlen($haystack); $i++) {
       $acc = "";
       if ($haystack[$i] === $needle[0]) {
@@ -14,26 +15,26 @@ class Solution
         // echo ('<br>');
 
         for ($x = 0; $x < strlen($needle); $x++) {
-          $index = $x + $i;
-          echo ("Checking: $haystack[$index] | $needle[$x]");
-          echo ('<br>');
-          if ($haystack[$index] === $needle[$x]) {
-            $acc .= $haystack[$index];
-            echo ("ACC updated: $acc");
-            echo ('<br>');
+          // $index = $x + $i;
+          // echo ("Checking: $haystack[$index] | $needle[$x]");
+          // echo ('<br>');
+          if ($haystack[$x + $i] === $needle[$x]) {
+            $acc .= $haystack[$x + $i];
+            // echo ("ACC updated: $acc");
+            // echo ('<br>');
           }
         }
-        echo ("FINAL: $acc");
-        echo ('<br>');
+        // echo ("FINAL: $acc");
+        // echo ('<br>');
         if ($acc === $needle) {
-          echo ("HOOYA");
-          echo ($i);
+          // echo ("HOOYA");
+          // echo ($i);
           return $i;
         }
       }
     }
 
-    echo ("Failed");
+    // echo ("Failed");
     return -1;
   }
 }
