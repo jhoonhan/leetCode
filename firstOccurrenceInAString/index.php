@@ -6,26 +6,37 @@ class Solution
 {
   function strStr(string $haystack, string $needle): int
   {
-    $acc = "";
-    $i = 0;
-    $j = 0;
-    while ($j < strlen($needle) && $i < strlen($haystack)) {
-      if ($haystack[$i] === $needle[$j]) {
-        $acc .= $haystack[$i];
-        $j++;
-      } else {
-        $acc = "";
-        $j = 0;
-      }
+    for ($i = 0; $i < strlen($haystack); $i++) {
+      $acc = "";
+      if ($haystack[$i] === $needle[0]) {
+        // echo ('<br>');
+        // echo ("First Letter Match: $haystack[$i] | $needle[0]");
+        // echo ('<br>');
 
-      if ($acc === $needle) {
-        return $i - (strlen($needle) - 1);
+        for ($x = 0; $x < strlen($needle); $x++) {
+          $index = $x + $i;
+          echo ("Checking: $haystack[$index] | $needle[$x]");
+          echo ('<br>');
+          if ($haystack[$index] === $needle[$x]) {
+            $acc .= $haystack[$index];
+            echo ("ACC updated: $acc");
+            echo ('<br>');
+          }
+        }
+        echo ("FINAL: $acc");
+        echo ('<br>');
+        if ($acc === $needle) {
+          echo ("HOOYA");
+          echo ($i);
+          return $i;
+        }
       }
-
-      $i++;
     }
+
+    echo ("Failed");
+    return -1;
   }
 }
 
 $solution = new Solution();
-$solution->strStr('sadbutsad', 'sad');
+$solution->strStr('a', 'a');
