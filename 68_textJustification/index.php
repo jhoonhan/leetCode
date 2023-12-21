@@ -7,7 +7,7 @@ use function PHPSTORM_META\type;
 class Solution
 {
 
-  private function aaang(array $wordRow, int $maxWidth): string
+  private function aaang(array $wordRow, int $maxWidth, bool $istLast): string
   {
     $diff = $maxWidth - strlen(join("", $wordRow));
     $gaps = count($wordRow) - 1;
@@ -19,20 +19,24 @@ class Solution
     }
 
     $str = "";
-    for ($i = 0; $i <= $gaps; $i++) {
-      # code...
-      if ($i < $gaps) {
-        $str .= $wordRow[$i] . str_repeat('_', $dist);
-        if ($remainder > 0) {
-          $str .= "_";
-          $remainder--;
+    if (!$istLast) {
+      for ($i = 0; $i <= $gaps; $i++) {
+        if ($i < $gaps) {
+          $str .= $wordRow[$i] . str_repeat(' ', $dist);
+          if ($remainder > 0) {
+            $str .= ' ';
+            $remainder--;
+          }
+        } elseif ($maxWidth - strlen($str) > 0) {
+          $str .= $wordRow[$i];
+          $str .= str_repeat(' ', $maxWidth - strlen($str));
         }
-      } else {
-        $str .= $wordRow[$i];
       }
+    } else {
+      $str = join(' ', $wordRow);
+      $str .= str_repeat(' ', $maxWidth - strlen($str));
     }
-    for ($j = 0; $j < $remainder; $j++) {
-    }
+
 
     return $str;
   }
@@ -45,19 +49,12 @@ class Solution
 
     for ($i = 0; $i < count($words); $i++) {
       $count = $acc + strlen($words[$i]) + 1;
-      echo ("Count: $count");
-      echo ('<br>');
       if ($count <= $maxWidth) {
-        echo ("Success: $count");
-        echo ('<br>');
         // Update the accumulator so that it can be compared with maxwidth during next iteration
         $acc = $count;
         // Add words to result
         $res[$row][] = $words[$i];
-        print_r($res[$row]);
       } else {
-        echo ("Failed: $count");
-        echo ('<br>');
         // If failed, move doen a row
         $row++;
         // Start fresh:
@@ -65,29 +62,28 @@ class Solution
         $acc = strlen($words[$i]);
         // Add self to res
         $res[$row][] = $words[$i];
-        print_r($res[$row]);
       }
-      echo ('<br>');
-      echo ('<br>');
     }
 
-
-    $real = [];
+    // Returns
+    $resStr = [];
     foreach ($res as $key => $row) {
-      $real[] = $this->aaang($row, $maxWidth);
-    }
-    echo ('<br>');
-
-    foreach ($real as $key => $strRow) {
-      # code...
-      echo ($strRow);
-      echo ('<br>');
+      if ($key < count($res) - 1) {
+        $resStr[] = $this->aaang($row, $maxWidth, false);
+      } else {
+        $resStr[] = $this->aaang($row, $maxWidth, true);
+      }
     }
 
+    // foreach ($resStr as $key => $strRow) {
+    //   echo ($strRow);
+    //   echo ('<br>');
+    // }
 
-    return [];
+
+    return $resStr;
   }
 }
 
 $solution = new Solution();
-$solution->fullJustify(["this", "is", "an", "example", "of", "text", "justification"], 16);
+$solution->fullJustify(["What", "must", "be", "acknowledgment", "shall", "be"], 16);
