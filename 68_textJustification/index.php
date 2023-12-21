@@ -17,7 +17,6 @@ class Solution
       $dist = (int)floor($diff / $gaps);
       $remainder = $diff % $gaps;
     }
-
     $str = "";
     if (!$istLast) {
       for ($i = 0; $i <= $gaps; $i++) {
@@ -36,8 +35,6 @@ class Solution
       $str = join(' ', $wordRow);
       $str .= str_repeat(' ', $maxWidth - strlen($str));
     }
-
-
     return $str;
   }
 
@@ -50,22 +47,15 @@ class Solution
     for ($i = 0; $i < count($words); $i++) {
       $count = $acc + strlen($words[$i]) + 1;
       if ($count <= $maxWidth) {
-        // Update the accumulator so that it can be compared with maxwidth during next iteration
         $acc = $count;
-        // Add words to result
         $res[$row][] = $words[$i];
       } else {
-        // If failed, move doen a row
         $row++;
-        // Start fresh:
-        // Accumulator is not the length of itself
         $acc = strlen($words[$i]);
-        // Add self to res
         $res[$row][] = $words[$i];
       }
     }
 
-    // Returns
     $resStr = [];
     foreach ($res as $key => $row) {
       if ($key < count($res) - 1) {
@@ -74,12 +64,10 @@ class Solution
         $resStr[] = $this->aaang($row, $maxWidth, true);
       }
     }
-
     // foreach ($resStr as $key => $strRow) {
     //   echo ($strRow);
     //   echo ('<br>');
     // }
-
 
     return $resStr;
   }
