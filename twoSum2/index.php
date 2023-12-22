@@ -4,34 +4,14 @@ declare(strict_types=1);
 
 class Solution
 {
-
   function twoSum(array $numbers, int $target): array
   {
     $map = array();
     for ($i = 0; $i < count($numbers); $i++) {
-
-      $val = $numbers[$i];
-      $pair = $target - $val;
-
-      echo ("$val | $pair");
-      echo ('<br>');
-
-
-      if (isset($map[$pair])) {
-        echo ("Found pair [$map[$pair], $i]");
-        echo ('<br>');
-        echo ('<br>');
-
-        return [$map[$pair], $i + 1];
+      if (isset($map[$target - $numbers[$i]])) {
+        return [$map[$target - $numbers[$i]], $i + 1];
       } else {
-        echo ("Adding $pair");
-        echo ('<br>');
-
-        $map[$val] = $i + 1;
-        echo (json_encode($map));
-
-        echo ('<br>');
-        echo ('<br>');
+        $map[$numbers[$i]] = $i + 1;
       }
     }
   }
