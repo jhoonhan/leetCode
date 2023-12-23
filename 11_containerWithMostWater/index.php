@@ -47,10 +47,14 @@ class Solution
       echo ('<br>');
 
 
+
       echo ('<br>');
     }
+    echo ($max);
+
+    return $max;
   }
 }
 
 $solution = new Solution();
-$solution->maxArea([3, 5, 1, 3, 4, 5, 4, 1]);
+$solution->maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]);
