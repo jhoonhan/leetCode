@@ -71,19 +71,20 @@ class Solution
       }
       // Larger
       else {
-        echo ("ACC is larger: ");
-        echo (json_encode($acc));
-        echo ('<br>');
-        $sum = array_sum($acc);
-        echo ("Sum: $sum");
-        echo ('<br>');
+        // echo ("ACC is larger: ");
+        // echo (json_encode($acc));
+        // echo ('<br>');
+        // $sum = array_sum($acc);
+        // echo ("Sum: $sum");
+        // echo ('<br>');
 
-        $r++;
-        $acc[array_key_last($acc)] = $nums[$r];
-        echo ("Last El changed.");
-        echo ('<br>');
+        // $r++;
+        // $acc[array_key_last($acc)] = $nums[$r];
+        // echo ("Last El changed.");
+        // echo ('<br>');
 
-        echo (json_encode($acc));
+        // echo (json_encode($acc));
+        return count($acc);
       }
       // Equal
       if (array_sum($acc) >= $target) {
