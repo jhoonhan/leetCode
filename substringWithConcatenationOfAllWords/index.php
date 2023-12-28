@@ -12,47 +12,59 @@ class Solution
     $success = [];
 
 
-    for ($i = 0; $i < strlen($s) - ($wordLegnth * count($words)); $i++) {
+    for ($i = 0; $i <= strlen($s) - ($wordLegnth * count($words)); $i++) {
       // Check first 3
-      $substr = substr($s, $i, 3);
+      $substr = substr($s, $i, $wordLegnth);
 
 
-      echo ("$i :: $substr");
-      echo ('<br>');
+      // echo ("$i :: $substr");
+      // echo ('<br>');
 
       // If yes
+      $brute = $words;
+      if (in_array($substr, $brute)) {
+        for ($j = $i; $j <= ($wordLegnth * count($words)) + $i; $j += $wordLegnth) {
+          # code...
+          echo ($j);
+          echo (" | ");
+          echo ($wordLegnth * count($words) + $wordLegnth);
 
-      $aleady = [];
-      if (in_array($substr, $words)) {
-        $counter = $i;
-        foreach ($words as $word) {
-          $nextWord = substr($s, $counter, 3);
-          if (in_array($nextWord, $words) && !in_array($nextWord, $aleady)) {
-            $aleady[] = $nextWord;
-            $counter += $wordLegnth;
+
+          echo ('<br>');
+
+          $nextWord = substr($s, $j, $wordLegnth);
+          echo ("$i-$j :: $nextWord");
+          echo ('<br>');
+          echo (json_encode($brute));
+          echo ('<br>');
+          var_dump(in_array($nextWord, $brute));
+
+
+
+          $key = array_search($nextWord, $brute);
+          if (in_array($nextWord, $brute)) {
+            echo ("AANG");
+            echo ('<br>');
+            unset($brute[$key]);
+            echo (json_encode($brute));
+            echo ('<br>');
+            if (count($brute) === 0) {
+              echo ("SUCCESS!");
+              echo ('<br>');
+              $success[] = $i;
+              break;
+            }
           } else {
-            echo ("Moving On");
+            // echo ("Moving On");
             echo ('<br>');
             echo ('<br>');
             break;
-          }
-
-          if (count($aleady) === count($words)) {
-            echo ('<br>');
-            echo ('<br>');
-            echo ('<br>');
-            echo ("SUCCESS with counter: $i");
-            $success[] = $i;
-
-            echo ('<br>');
-            echo ('<br>');
-            echo ('<br>');
           }
         }
       }
       // If no
       else {
-        echo ("Moving On");
+        // echo ("Moving On");
         echo ('<br>');
         echo ('<br>');
       }
@@ -62,10 +74,10 @@ class Solution
     echo (json_encode($success));
     echo ('<br>');
 
-    return [0, 0];
+    return $success;
   }
 }
 
 $solution = new Solution();
-// $solution->findSubstring("barfoothefoobarman", ["foo", "bar"]);
-$solution->findSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"]);
+$solution->findSubstring("barfoothefoobarman", ["foo", "bar"]);
+// $solution->findSubstring("wordgoodgoodgoodbestword", ["word", "good", "best", "good"]);
