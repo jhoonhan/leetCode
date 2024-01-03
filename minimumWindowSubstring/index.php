@@ -14,7 +14,6 @@ class Solution
     $sChars = str_split($s);
 
     // Create hashmap
-    $window = array_fill_keys($tChars, 0);
     $countT = array_fill_keys($tChars, 0);
     foreach ($tChars as $value) {
       $countT[$value]++;
@@ -23,23 +22,39 @@ class Solution
     $have = 0;
     $need = count($countT);
     $res = [-1, -1];
-    $resLen = INF;
+    $resLen = strlen($s) + 1;
     $l = 0;
 
-    for ($r = 0; $r < strlen($s) - 1; $r++) {
-      $c = $s[$r];
-      $window[$c] = 1 + ($window[$c] ?? 0);
+    for ($r = 0; $r < strlen($s); $r++) {
+      $curr = $s[$r];
+      echo (":: $s[$r]");
+      echo ('<br>');
 
-      if (array_key_exists($c, $countT) && $window[$c] === $countT[$c]) {
-        $have++;
+      if (array_key_exists($curr, $countT)) {
+        $window[$curr] = 1 + ($window[$curr] ?? 0);
       }
 
+      if (array_key_exists($curr, $countT) && $window[$curr] === $countT[$curr]) {
+        $have++;
+        echo (json_encode($window));
+        echo ('<br>');
+      }
+
+
       while ($have === $need) {
+        echo ("TRUE :: ");
+        echo (implode('', array_slice($sChars, $l, ($r - $l + 1))));
+        echo ('<br>');
+        echo (json_encode($window));
+        echo ('<br>');
+
         if (($r - $l + 1) < $resLen) {
           $res = [$l, $r];
           $resLen = ($r - $l + 1);
         }
-        $window[$s[$l]]--;
+        if (array_key_exists($s[$l], $countT)) {
+          $window[$s[$l]]--;
+        }
 
         if (array_key_exists($s[$l], $countT) && $window[$s[$l]] < $countT[$s[$l]]) {
           $have--;
@@ -94,9 +109,9 @@ class Solution
 
 
 
-    echo (implode('', array_slice($sChars, $l, $r - $l)));
+    echo (implode('', array_slice($sChars, $res[0], $resLen)));
 
-    return implode('', array_slice($sChars, $l, $r - $l));
+    return implode('', array_slice($sChars, $res[0], $resLen));
   }
 }
 
