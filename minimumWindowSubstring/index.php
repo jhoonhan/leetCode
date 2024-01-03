@@ -6,7 +6,8 @@ class Solution
 {
   function minWindow(string $s, string $t): string
   {
-    if ($t === "") {
+    if ($t === "" || strlen($t) > strlen($s)) {
+      echo ("FAILED");
       return "";
     }
 
@@ -51,6 +52,7 @@ class Solution
         if (($r - $l + 1) < $resLen) {
           $res = [$l, $r];
           $resLen = ($r - $l + 1);
+          echo ("result logged");
         }
         if (array_key_exists($s[$l], $countT)) {
           $window[$s[$l]]--;
@@ -108,13 +110,21 @@ class Solution
 
 
 
+    echo ("RESULT: ");
+    echo ('<br>');
+    echo (json_encode($res));
+    echo ('<br>');
 
     echo (implode('', array_slice($sChars, $res[0], $resLen)));
 
-    return implode('', array_slice($sChars, $res[0], $resLen));
+    if ($res[0] >= 0 && $res[1] >= 0) {
+      return implode('', array_slice($sChars, $res[0], $resLen));
+    } else {
+      return "";
+    }
   }
 }
 
 $solution = new Solution();
 // $solution->minWindow("abc", "b");
-$solution->minWindow("AODBECODEBANC", "ABC");
+$solution->minWindow("a", "b");
