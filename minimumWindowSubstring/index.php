@@ -10,12 +10,9 @@ class Solution
       return "";
     }
 
-    $tChars = str_split($t);
-    $sChars = str_split($s);
-
     // Create hashmap
-    $countT = array_fill_keys($tChars, 0);
-    foreach ($tChars as $value) {
+    $countT = array_fill_keys(str_split($t), 0);
+    foreach (str_split($t) as $value) {
       $countT[$value]++;
     }
 
@@ -24,7 +21,6 @@ class Solution
     $res = [-1, -1];
     $resLen = strlen($s) + 1;
     $l = 0;
-
     for ($r = 0; $r < strlen($s); $r++) {
       $curr = $s[$r];
       if (array_key_exists($curr, $countT)) {
@@ -51,48 +47,8 @@ class Solution
       }
     };
 
-    // while ($l < $r && $r < strlen($s) + 1) {
-    //   $subStr = array_slice($sChars, $l, $r - $l);
-    //   $window = array_fill_keys($tChars, 0);
-    //   $has = 0;
-    //   foreach ($subStr as $value) {
-    //     if (in_array($value, $tChars)) {
-    //       $window[$value]++;
-    //       if ($window[$value] <= $map[$value]) {
-    //         $has++;
-    //       }
-    //     }
-    //   }
-    //   echo ("$l and $r");
-    //   echo ('<br>');
-
-    //   echo (":: ");
-    //   echo (implode('', $subStr));
-    //   echo (" | ");
-
-    //   echo ($has);
-    //   echo ('<br>');
-
-
-    //   // If contains
-    //   if ($has === strlen($t)) {
-    //     echo ('good');
-    //     echo ('<br>');
-    //     $l++;
-    //     if (count($subStr) < count($res) || count($res) === 0) {
-    //       $res = $subStr;
-    //     }
-    //   }
-    //   // If not
-    //   else {
-    //     echo ('bad');
-    //     echo ('<br>');
-    //     $r++;
-    //   }
-    // }
-
     if ($res[0] >= 0 && $res[1] >= 0) {
-      return implode('', array_slice($sChars, $res[0], $resLen));
+      return implode('', array_slice(str_split($s), $res[0], $resLen));
     } else {
       return "";
     }
