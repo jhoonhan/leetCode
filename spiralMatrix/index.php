@@ -12,81 +12,57 @@ declare(strict_types=1);
 
 class Solution
 {
-
   public function move($matrix, &$res, $from, $to, &$position, $isHoriz, $isAdd, $isIncrease)
   {
-    $indexFrom = $from;
-    $indexTo = $to;
     if ($isAdd) {
-      $indexTo++;
+      $to++;
     } else {
-      $indexTo--;
+      $to--;
     }
-    while ($indexFrom !== $indexTo) {
+    while ($from !== $to) {
       if ($isHoriz) {
-        echo ($matrix[$position][$indexFrom]);
-        $res[] = $matrix[$position][$indexFrom];
+        $res[] = $matrix[$position][$from];
       } else {
-        echo ($matrix[$indexFrom][$position]);
-        $res[] = $matrix[$indexFrom][$position];
+        $res[] = $matrix[$from][$position];
       }
       if ($isAdd) {
-        $indexFrom++;
+        $from++;
       } else {
-        $indexFrom--;
+        $from--;
       }
-      echo ('  ');
-      echo ('<br>');
     }
     if ($isIncrease) {
       $position++;
     } else {
       $position--;
     }
-    echo (json_encode($res));
-    echo ('<br>');
   }
 
   function spiralOrder(array $matrix): array
   {
-    $totalCount = count($matrix[0]) * count($matrix);
+    $res = (array)[];
 
     $minV = 0;
     $maxV = count($matrix) - 1;
     $minH = 0;
     $maxH = count($matrix[0]) - 1;
-    $res = (array)[];
-
-
 
     $counter = 0;
-    while (count($res) !== $totalCount) {
-      echo ("minV: $minV | maxV: $maxV | minH: $minH | maxH: $maxH");
-      echo ('<br>');
-
+    while (count($res) !== count($matrix[0]) * count($matrix)) {
       if ($counter === 0) {
-        // 0 :: Horizontal Move
         $this->move($matrix, $res, $minH, $maxH, $minV, true, true, true);
         $counter++;
       } elseif ($counter === 1) {
-        // 1 :: Vertical Move
-        echo ('<br>');
         $this->move($matrix, $res, $minV, $maxV, $maxH, false, true, false);
         $counter++;
       } elseif ($counter === 2) {
-        // 2 :: Horizontal
-        echo ('<br>');
         $this->move($matrix, $res, $maxH, $minH, $maxV, true, false, false);
         $counter++;
       } else {
-        // 3 :: Vertical
-        echo ('<br>');
         $this->move($matrix, $res, $maxV, $minV, $minH, false, false, true);
         $counter = 0;
       }
-      echo ('<br>');
     }
-
     return $res;
   }
 }
