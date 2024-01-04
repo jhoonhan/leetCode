@@ -2,13 +2,6 @@
 
 declare(strict_types=1);
 
-// for ($i = 0; $i <= $maxH; $i++) {
-//   # code...
-//   echo ($matrix[$minV][$i]);
-//   echo ('<br>');
-//   $res[] = $matrix[$minV][$i];
-// }
-// $minV++;
 
 class Solution
 {
