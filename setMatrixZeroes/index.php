@@ -13,18 +13,24 @@ class Solution
         $rows = [];
         $cols = [];
         for ($row = 0; $row < count($matrix); $row++) {
-            for ($col = 0; $col < count($matrix); $col++) {
+            for ($col = 0; $col < count($matrix[0]); $col++) {
                 if ($matrix[$row][$col] === 0) {
                     $rows[] = $row;
                     $cols[] = $col;
                 }
             }
         }
-        echo (json_encode($rows));
-        echo ('<br>');
-        echo (json_encode($cols));
+
+        for ($row = 0; $row < count($matrix); $row++) {
+            for ($col = 0; $col < count($matrix[0]); $col++) {
+                if (in_array($row, $rows) || in_array($col, $cols)) {
+                    $matrix[$row][$col] = 0;
+                }
+            }
+        }
     }
 }
 
 $solution = new Solution();
-$solution->setZeroes([[1, 1, 1], [1, 0, 1], [1, 1, 1]]);
+$matrix = [[1, 1, 1], [1, 0, 1], [1, 1, 1]];
+$solution->setZeroes($matrix);
