@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -16,6 +17,16 @@ declare(strict_types=1);
  */
 class Solution
 {
+	function dfs($node)
+	{
+		if ($node) {
+			$this->counter++;
+			$this->dfs($node->left);
+			$this->dfs($node->right);
+		}
+	}
+
+	private $counter = 0;
 
 	/**
 	 * @param   TreeNode  $root
@@ -24,5 +35,12 @@ class Solution
 	 */
 	function countNodes($root)
 	{
+		if (!$root) {
+			return $this->counter;
+		}
+
+		$this->dfs($root);
+
+		return $this->counter;
 	}
 }
