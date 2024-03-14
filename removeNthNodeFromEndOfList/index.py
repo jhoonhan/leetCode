@@ -19,6 +19,6 @@ class Solution:
             right = right.next
             left = left.next
 
-        left.next = right.next
+        left.next = left.next.next
 
         return dummy.next
