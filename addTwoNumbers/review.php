@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -24,6 +25,7 @@ class Solution
 	 */
 	function addTwoNumbers($l1, $l2)
 	{
+		$q = new \Ds\Queue();
 	}
 }
 
