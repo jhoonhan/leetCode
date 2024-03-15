@@ -32,8 +32,119 @@ class DoublyLinkedList:
 
         return True
 
+    def pop(self):
+        if self.length == 0:
+            return None
+        temp = self.tail
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            temp.prev = None
+
+        self.length -= 1
+
+        return temp
+
+    def prepend(self, value):
+        new_node = Node(value)
+
+        if self.head == None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        self.length += 1
+        return True
+
+    def pop_first(self):
+        if self.head == None:
+            return None
+        temp = self.head
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = self.head.next
+            self.head.prev = None
+            temp.next = None
+        self.length -= 1
+
+        return temp
+
+    def get(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        temp = self.head
+        if index < self.length / 2:
+            for _ in range(index):
+                temp = temp.next
+        else:
+            temp = self.tail
+            for _ in range(self.length - 1, index, -1):
+                temp = temp.prev
+
+        return temp
+
+    def set(self, index, value):
+        temp = self.get(index)
+        if temp:
+            temp.value = value
+            return True
+
+        return False
+
+    def insert(self, index, value):
+        if index < 0 or index > self.length:
+            return None
+        if index == 0:
+            return self.prepend(value)
+        if index == self.length:
+            return self.append(value)
+
+        new_node = Node(value)
+        temp = self.get(index)
+        temp.prev.next = new_node
+        new_node.prev = temp.prev
+        temp.prev = new_node
+        new_node.next = temp
+        self.length += 1
+
+        return True
+
+    def remove(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.length - 1:
+            return self.pop()
+
+        temp = self.get(index)
+        temp.prev.next = temp.next
+        temp.next.prev = temp.prev
+
+        temp.next = None
+        temp.prev = None
+
+        self.length -= 1
+
 
 aang = DoublyLinkedList(1)
 aang.append(2)
+aang.pop()
+aang.append(2)
+aang.append(3)
+aang.prepend(0)
+aang.insert(4, 4)
+aang.remove(5)
+
+# print(aang.pop_first())
+# print(aang.get(2))
+
 
 aang.print_list()
