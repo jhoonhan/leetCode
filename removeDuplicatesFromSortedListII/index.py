@@ -1,25 +1,45 @@
 class Solution(object):
+    # def deleteDuplicates(self, head):
+    #     dummy = ListNode(-1)
+    #     dummy.next = head
+    #     # We use l (for node just before duplications begins), r (for the last node of the duplication group)...
+    #     r, l = head, dummy
+    #     while r:
+    #         while r.next and r.val == r.next.val:
+    #             r = r.next
+
+    #         if l.next == r:
+    #             l = l.next
+    #             r = r.next
+    #         else:
+    #             l.next = r.next
+    #             r = l.next
+
+    #     return dummy.next
     def deleteDuplicates(self, head):
-        fake = ListNode(-1)
-        fake.next = head
-        # We use prev (for node just before duplications begins), curr (for the last node of the duplication group)...
-        curr, prev = head, fake
-        while curr:
-            # while we have curr.next and its value is equal to curr...
-            # It means, that we have one more duplicate...
-            while curr.next and curr.val == curr.next.val:
-                # So move curr pointer to the right...
-                curr = curr.next
-            # If it happens, that prev.next equal to curr...
-            # It means, that we have only 1 element in the group of duplicated elements...
-            if prev.next == curr:
-                # Don't need to delete it, we move both pointers to right...
-                prev = prev.next
-                curr = curr.next
-            # Otherwise, we need to skip a group of duplicated elements...
-            # set prev.next = curr.next, and curr = prev.next...
+        # Edge case: If the linked list is empty or has only one element
+        if not head or not head.next:
+            return head
+
+        # Create a dummy node to handle cases where the first few elements are duplicates
+        dummy = ListNode(-1)
+        dummy.next = head
+
+        # Initialize pointers l (for the previous distinct node) and r (for the current node)
+        l = dummy
+        r = head
+
+        while r and r.next:
+            # If the current node's value is equal to the next node's value
+            if r.val == r.next.val:
+                # Move r until it points to a distinct value
+                while r.next and r.val == r.next.val:
+                    r = r.next
+                # Skip the duplicates by assigning l's next to the distinct node
+                l.next = r.next
             else:
-                prev.next = curr.next
-                curr = prev.next
-        # Return the linked list...
-        return fake.next
+                # Move l and r to the next distinct node
+                l = l.next
+            r = r.next
+
+        return dummy.next
