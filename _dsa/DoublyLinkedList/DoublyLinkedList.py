@@ -133,6 +133,8 @@ class DoublyLinkedList:
 
         self.length -= 1
 
+        return temp
+
 
 aang = DoublyLinkedList(1)
 aang.append(2)
