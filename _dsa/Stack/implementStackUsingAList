@@ -1,0 +1,16 @@
+class Stack:
+    stack = []
+
+    def __init__(self, value) -> None:
+        self.stack.append(value)
+        self.height = len(self.stack)
+        self.top = self.length - 1
+
+    def print_stack(self):
+        for i in range(self.height):
+            print(self.stack[i])
+
+
+stack = Stack(0)
+
+stack.print_stack()
