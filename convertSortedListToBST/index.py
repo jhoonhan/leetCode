@@ -14,27 +14,26 @@ class TreeNode:
 
 
 class Solution:
-
-    def __r_insert(self, currentNode, value):
-        if currentNode == None:
-            return TreeNode(value)
-        if currentNode.value > value:
-            currentNode.left = self.__r_insert(currentNode.left, value)
-        if currentNode.value < value:
-            currentNode.right = self.__r_insert(currentNode.right, value)
-        return currentNode
-
-    def r_insert(self, currentNode, value):
-        self.__r_insert(currentNode, value)
-
     def sortedListToBST(self, head):
         if head == None:
-            return []
-        temp = head
-        while temp:
-            print(temp.val)
-            temp = temp.next
+            return None
+        if head.next == None:
+            return TreeNode(head.val)
 
+        fast = head
+        slow = head
+        prev_slow = slow
 
-sol = Solution()
-sol.sortedListToBST([-10, -3, 0, 5, 9])
+        while fast and fast.next:
+            prev_slow = slow
+            fast = fast.next.next
+            slow = slow.next
+
+        temp = slow.next
+
+        prev_slow.next = None
+        new_node = TreeNode(slow.val)
+        new_node.left = self.sortedListToBST(head)
+        new_node.right = self.sortedListToBST(temp)
+
+        return new_node
