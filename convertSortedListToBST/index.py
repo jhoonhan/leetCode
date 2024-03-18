@@ -10,8 +10,16 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+
     def sortedListToBST(self, head):
-        print("aang")
+        if len(head) == 0:
+            return []
+        root = head[0]
+        def r_insert(currentNode, value):
+            
+            
+
+        
 
 
 sol = Solution()
