@@ -1,3 +1,1 @@
-print("aaang")
-print()
-print("aaang2", end="")
+print(min(1, 1))
