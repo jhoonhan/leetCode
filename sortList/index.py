@@ -78,26 +78,15 @@ class Solution:
         while head1 is not None and head2 is not None:
             if head1.val < head2.val:
                 head.next = head1
-                print("HEAD1")
-
-                print(head1.next.val)
-
                 head1 = head1.next
             else:
                 head.next = head2
                 head2 = head2.next
             head = head.next
-        print(head1)
-        print(head2)
 
         while head1 is not None:
-            print(head1.val)
-
-            print(head.val)
             head.next = head1
-            print(head.next.val)
             head = head.next
-            print(head.val)
             head1 = head1.next
             break
         while head2 is not None:
@@ -108,6 +97,8 @@ class Solution:
 
     def sortList(self, head):
         if head == None:
+            return
+        if head.next == None:
             return head
         # find middle
         slow = head
@@ -118,7 +109,8 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
         mid.next = None
-        left = head
-        right = slow
+
+        left = self.sortList(head)
+        right = self.sortList(slow)
 
         return self.__merge(left, right)
