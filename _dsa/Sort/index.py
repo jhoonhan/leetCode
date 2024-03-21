@@ -86,11 +86,20 @@ def __pivot(my_list, pivot_index, end_index):
         return my_list
     swap_index = pivot_index
     for i in range(pivot_index + 1, end_index + 1):
+        print("aaaaagn!")
+
         if my_list[pivot_index] > my_list[i]:
             swap_index += 1
+            print(f"---Inner Swapping: {my_list[swap_index]} | {my_list[i]}")
             __swap(my_list, swap_index, i)
+            print(my_list)
+            print("")
 
+    print(f"swapping {my_list[pivot_index]} | {my_list[swap_index]}")
     __swap(my_list, pivot_index, swap_index)
+    print(my_list)
+    print("")
+
     return swap_index
 
 

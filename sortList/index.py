@@ -114,53 +114,39 @@ class Solution:
 
         return self.__merge(left, right)
 
+    dummy = ListNode()
+
     def __swap(self, node1, node2):
         node1.val, node2.val = node2.val, node1.val
 
-    def __get_tail(self, head):
-        tail = head
-        counter = 0
-        while tail and tail.next:
-            tail = tail.next
-            counter += 1
-        return tail, counter
-
     def __pivot(self, pivot, end):
-        # if pivot == None:
-        #     return
-        if pivot.next == None:
-            return pivot
         swap = pivot
         comp = pivot.next
-        prev = swap
-        while comp != end.next and comp is not None:
+        end_val = None if end == None else end.val
+
+        while comp is not None and comp.val != end_val:
             if pivot.val > comp.val:
-                prev = swap
                 swap = swap.next
                 self.__swap(swap, comp)
             comp = comp.next
+
         self.__swap(pivot, swap)
-        prev.next = None
-        l = pivot
-        r = swap.next
-        print(l)
-        print(r)
 
-        return {"left": l, "right": r}
+        return swap
 
-    def __quick_sort(self):
-        if left != right:
-            left, right = self.__pivot(left, right)
+    def __quick_sort(self, head, right):
+        right_val = right.val if right is not None else None
+        head_val = head.val if head is not None else None
+        if head_val != right_val:
+            pvt = self.__pivot(head, right)
+            self.__quick_sort(head, pvt)
+            self.__quick_sort(pvt.next, right)
+        return head
 
     def sortList(self, head):
-        tail, counter = self.__get_tail(head)
-
-        nodes = self.__pivot(head, tail)
-        print(nodes)
-
-        # left = nodes["left"]
-        # right = nodes["right"]
-        # print(left)
-        # print(right)
-
-        return head
+        if head == None:
+            return None
+        if head.next == None:
+            return head
+        self.dummy.next = head
+        return self.__quick_sort(self.dummy.next, None)
