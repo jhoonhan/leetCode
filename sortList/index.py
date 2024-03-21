@@ -88,14 +88,13 @@ class Solution:
             head.next = head1
             head = head.next
             head1 = head1.next
-            break
         while head2 is not None:
             head.next = head2
             head2 = head2.next
             head = head.next
         return dummy.next
 
-    def sortList(self, head):
+    def merge(self, head):
         if head == None:
             return
         if head.next == None:
@@ -114,3 +113,54 @@ class Solution:
         right = self.sortList(slow)
 
         return self.__merge(left, right)
+
+    def __swap(self, node1, node2):
+        node1.val, node2.val = node2.val, node1.val
+
+    def __get_tail(self, head):
+        tail = head
+        counter = 0
+        while tail and tail.next:
+            tail = tail.next
+            counter += 1
+        return tail, counter
+
+    def __pivot(self, pivot, end):
+        # if pivot == None:
+        #     return
+        if pivot.next == None:
+            return pivot
+        swap = pivot
+        comp = pivot.next
+        prev = swap
+        while comp != end.next and comp is not None:
+            if pivot.val > comp.val:
+                prev = swap
+                swap = swap.next
+                self.__swap(swap, comp)
+            comp = comp.next
+        self.__swap(pivot, swap)
+        prev.next = None
+        l = pivot
+        r = swap.next
+        print(l)
+        print(r)
+
+        return {"left": l, "right": r}
+
+    def __quick_sort(self):
+        if left != right:
+            left, right = self.__pivot(left, right)
+
+    def sortList(self, head):
+        tail, counter = self.__get_tail(head)
+
+        nodes = self.__pivot(head, tail)
+        print(nodes)
+
+        # left = nodes["left"]
+        # right = nodes["right"]
+        # print(left)
+        # print(right)
+
+        return head

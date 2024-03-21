@@ -40,7 +40,7 @@ def insertion_sort(my_list):
     return my_list
 
 
-print(insertion_sort([2, 3, 15, 3, 46, 35, 6, 8]))
+# print(insertion_sort([2, 3, 15, 3, 46, 35, 6, 8]))
 
 
 def __merge(list1, list2):
@@ -75,3 +75,38 @@ def merge_sort(my_list):
     right = merge_sort(my_list[mid_index:])
 
     return __merge(left, right)
+
+
+def __swap(my_list, index1, index2):
+    my_list[index1], my_list[index2] = my_list[index2], my_list[index1]
+
+
+def __pivot(my_list, pivot_index, end_index):
+    if len(my_list) == 1:
+        return my_list
+    swap_index = pivot_index
+    for i in range(pivot_index + 1, end_index + 1):
+        if my_list[pivot_index] > my_list[i]:
+            swap_index += 1
+            __swap(my_list, swap_index, i)
+
+    __swap(my_list, pivot_index, swap_index)
+    return swap_index
+
+
+def __quick_sort_helper(my_list, left, right):
+    if left < right:
+        pivot_index = __pivot(my_list, left, right)
+        __quick_sort_helper(my_list, left, pivot_index - 1)
+        __quick_sort_helper(my_list, pivot_index + 1, right)
+
+    return my_list
+
+
+def quick_sort(my_list):
+    return __quick_sort_helper(my_list, 0, len(my_list) - 1)
+
+
+x = [4, 2, 1, 3]
+
+print(quick_sort(x))
