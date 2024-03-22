@@ -8,19 +8,10 @@ class Solution:
                 map[char] += 1
 
         for char in ransomNote:
-            if char in map:
-                if map[char] == 0:
-                    print("failed")
-
-                    return False
-                else:
-                    map[char] -= 1
+            if char in map and map[char] > 0:
+                map[char] -= 1
             else:
-                print("failed")
-
                 return False
-        print("pass")
-
         return True
 
 
