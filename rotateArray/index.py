@@ -3,6 +3,7 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        k = k % len(nums)
 
         def __yeweon_babo(nums, l, r):
             while l < r:
