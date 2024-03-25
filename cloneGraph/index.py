@@ -49,4 +49,14 @@ class Solution:
 
         __bfs(node)
 
+        def __dfs(node):
+            if node in hashmap:
+                return hashmap[node]
+
+            copy = Node(node.val)
+            hashmap[node] = copy
+            for nei in node.neighbors:
+                copy.neighbors.append(__dfs(nei))
+            return copy
+
         return hashmap[1]
