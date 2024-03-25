@@ -13,7 +13,6 @@ class Solution:
 
             q.append((r, c))
             visited.add((r, c))
-            # Iterate through the q
 
             while q:
                 row, col = q.popleft()
@@ -29,7 +28,6 @@ class Solution:
                         and grid[r][c] == "1"
                         and (r, c) not in visited
                     ):
-
                         q.append((r, c))
                         visited.add((r, c))
 
