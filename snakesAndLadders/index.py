@@ -27,6 +27,8 @@ class Solution:
                     # When it reaches, return move with one more since it is dealing with next move
                     return moves + 1
 
+                # visited is used since BFS can look for already visited nodes
+                # and we are trying to find the SHORTEST path
                 if next_square not in visited:
                     q.append([next_square, moves + 1])
                     visited.add(next_square)
