@@ -29,3 +29,23 @@ class Solution:
                 level.append(res)
 
         return level
+
+    def levelOrder2(self, root: Optional[TreeNode]) -> List[List[int]]:
+        res = []
+
+        q = collections.deque()
+        q.append(root)
+
+        while q:
+            q_len = len(q)
+            level = []
+            for _ in range(q_len):
+                cur = q.popleft()
+                if cur:
+                    level.append(cur.val)
+                    q.append(cur.left)
+                    q.append(cur.right)
+            if level:
+                res.append(level)
+
+        return res
