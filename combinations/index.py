@@ -27,7 +27,7 @@ class Solution:
                 ## none
                 ### res = [12, 13, 14, 23, 24, 34]
                 ## none
-                res.append(acc)
+                res.append(acc.copy())
                 return
             for j in range(i, n):
                 # i=0, ['1, 2, 3, 4], ""

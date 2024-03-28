@@ -29,7 +29,7 @@ class Solution:
                 ## res = ["ad", "ae", "af"]
                 # none
                 ## res = ["ad", "ae", "af", "bd"]
-                res.append(acc)
+                res.append(acc.copy())
                 return
             for c in digitToChar[digits[i]]:
                 # a,b,c
