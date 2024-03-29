@@ -24,7 +24,6 @@ class Solution:
         l = 0
         r = len(nums) - 1
         while l <= r:
-
             m = l + ((r - l) // 2)
             # reg BS
             if nums[m] > target:
@@ -43,4 +42,4 @@ class Solution:
         return res
 
 
-Solution().searchRange([5, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 9, 10], 88)
+Solution().searchRange([5, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 9, 10], 8)
