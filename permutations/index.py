@@ -1,5 +1,5 @@
 class Solution:
-    def permute2(self, nums: List[int]) -> List[List[int]]:
+    def permute2(self, nums: list) -> list:
         res = []
         visited = []
 
@@ -21,7 +21,7 @@ class Solution:
                 backtrack(i, [])
         return res
 
-    def permute(self, nums: List[int]) -> List[List[int]]:
+    def permute(self, nums: list) -> list:
         res = []
 
         if len(nums) == 1:
@@ -36,5 +36,8 @@ class Solution:
 
             res.extend(perms)
             nums.append(n)
-
+        print(res)
         return res
+
+
+Solution().permute([1, 2, 3])
