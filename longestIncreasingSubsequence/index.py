@@ -1,6 +1,5 @@
 class Solution:
-    def lengthOfLIS(self, nums: list) -> int:
-
+    def lengthOfLIS2(self, nums: list) -> int:
         def dfs(i, acc):
 
             res = []
@@ -28,6 +27,16 @@ class Solution:
         for a in traversed:
             max_c = max(max_c, len(a))
         return max_c
+
+    def lengthOfLIS(self, nums: list) -> int:
+        dp = [1] * len(nums)
+
+        for i in range(len(nums) - 1, -1, -1):
+            for j in range(i + 1, len(nums)):
+                if nums[j] > nums[i]:
+                    dp[i] = max(dp[i], 1 + dp[j])
+
+        return max(dp)
 
 
 Solution().lengthOfLIS([1, 2, 4, 3])
