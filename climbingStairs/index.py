@@ -1,12 +1,15 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        one, two = 1, 1
+        a, b, c = 2, 1, 1
+        for i in range(n - 2):
+            temp_a = a
+            temp_b = b
+            a = a + b + c
+            b = temp_a
+            c = temp_b
 
-        for i in range(n - 1):
-            temp = one
-            one = one + two
-            two = temp
-        return one
+        print(a)
+        return a
 
 
-Solution().climbStairs(4)
+Solution().climbStairs(5)
