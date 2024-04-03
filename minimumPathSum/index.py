@@ -51,15 +51,11 @@ class Solution:
                 if min_val == float("inf"):
                     min_val = 0
 
-                curr = grid[r][c] + min_val
-                dp[r][c] = curr
-                # print(curr)
+                dp[r][c] = grid[r][c] + min_val
 
-        print(dp)
-        res = dp[0][0]
-        print(res)
+        print(dp[0][0])
 
-        return res
+        return dp[0][0]
 
 
 Solution().minPathSum([[1, 2, 3], [4, 5, 6]])
