@@ -1,5 +1,5 @@
 class Solution:
-    def uniquePathsWithObstacles(self, obstacleGrid: list) -> int:
+    def uniquePathsWithObstacles2(self, obstacleGrid: list) -> int:
         row = len(obstacleGrid)
         col = len(obstacleGrid[0])
 
@@ -21,9 +21,27 @@ class Solution:
 
                 dp[r][c] = dp[r][c + 1] + dp[r + 1][c]
 
-        res = dp[0][0]
-        print(res)
-        return res
+        return dp[0][0]
+
+    # DFS brute force
+    def uniquePathsWithObstacles(self, obstacleGrid: list) -> int:
+        row = len(obstacleGrid)
+        col = len(obstacleGrid[0])
+
+        def dfs(r, c):
+
+            if r < 0 or r > row - 1 or c < 0 or c > col - 1 or obstacleGrid[r][c] == 1:
+                return 0
+
+            if r == row - 1 and c == col - 1 and obstacleGrid[r][c] != 1:
+                return 1
+
+            bottom = dfs(r + 1, c)
+            right = dfs(r, c + 1)
+
+            return bottom + right
+
+        return dfs(0, 0)
 
 
-Solution().uniquePathsWithObstacles([[0, 0, 0], [0, 1, 0], [0, 0, 0]])
+Solution().uniquePathsWithObstacles([[0, 1], [0, 0]])
