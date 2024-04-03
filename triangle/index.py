@@ -1,9 +1,9 @@
 class Solution:
-    def minimumTotal(self, triangle: list) -> int:
+    def minimumTotal2(self, triangle: list) -> int:
         dp = []
         for i in range(len(triangle)):
             dp.append([])
-            for j in range(len(triangle[i])):
+            for _ in range(len(triangle[i])):
                 dp[i].append(float("inf"))
 
         def dfs(i, level, acc):
@@ -14,19 +14,30 @@ class Solution:
             if level > len(triangle) - 1:
                 return acc
 
-            acc += triangle[level][i]
-            dp[level][i] = min(acc, dp[level][i])
+            if dp[level][i] != float("inf"):
+                print("dp fired")
+                return dp[level][i]
 
-            for j in range(i, i + 2):
-                dfs(j, level + 1, acc)
+            left = dfs(i, level + 1, acc)
+            right = dfs(i + 1, level + 1, acc)
+            min_val = min(left, right)
 
-            return acc
+            dp[level][i] = triangle[level][i] + min_val
+
+            return dp[level][i]
 
         dfs(0, 0, 0)
-        res = min(dp[-1])
-        print(res)
+        print(dp[0][0])
 
-        return res
+        return dp[0][0]
+
+    def minimumTotal(self, triangle: list) -> int:
+        dp = [0] * len(triangle) + 1
+
+        for row in triangle[::-1]:
+            for i, n in enumerate(row):
+                dp[i] = n + min(dp[i], dp[i + 1])
+        return dp[0]
 
 
-Solution().minimumTotal([[-10]])
+Solution().minimumTotal2([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]])
