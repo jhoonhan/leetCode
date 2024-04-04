@@ -36,7 +36,7 @@ class Solution:
             return acc
 
         res = dfs(len(grid) - 1, len(grid[0]) - 1, 0)
-        # print(res)
+        print(res)
 
     def minPathSum(self, grid: list) -> int:
         dp = [[float("inf")] * (len(grid[0]) + 1) for r in range(len(grid) + 1)]
@@ -58,4 +58,4 @@ class Solution:
         return dp[0][0]
 
 
-Solution().minPathSum([[1, 2, 3], [4, 5, 6]])
+Solution().minPathSum2([[1, 3, 1], [1, 5, 1], [4, 2, 1]])

@@ -6,27 +6,27 @@ class Solution:
             for _ in range(len(triangle[i])):
                 dp[i].append(float("inf"))
 
-        def dfs(i, level, acc):
+        def dfs(i, level):
             if len(triangle) == 1:
                 dp[0][0] = triangle[0][0]
                 return
 
             if level > len(triangle) - 1:
-                return acc
+                return 0
 
             if dp[level][i] != float("inf"):
                 print("dp fired")
                 return dp[level][i]
 
-            left = dfs(i, level + 1, acc)
-            right = dfs(i + 1, level + 1, acc)
+            left = dfs(i, level + 1)
+            right = dfs(i + 1, level + 1)
             min_val = min(left, right)
 
             dp[level][i] = triangle[level][i] + min_val
 
             return dp[level][i]
 
-        dfs(0, 0, 0)
+        dfs(0, 0)
         print(dp[0][0])
 
         return dp[0][0]
