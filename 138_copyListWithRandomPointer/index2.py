@@ -12,23 +12,19 @@ class Solution:
     def copyRandomList(self, head: "Optional[Node]") -> "Optional[Node]":
         if not head:
             return None
+        hashmap = {None: None}
 
-        hashmap = {}
         temp = head
         while temp:
-            hashmap[temp] = Node(temp.val)
+            copy = Node(temp.val)
+            hashmap[temp] = copy
             temp = temp.next
 
         temp = head
         while temp:
-            if temp.next:
-                hashmap[temp].next = hashmap[temp.next]
-            else:
-                hashmap[temp].next = None
-            if temp.random:
-                hashmap[temp].random = hashmap[temp.random]
-            else:
-                hashmap[temp].random = None
+            copy = hashmap[temp]
+            copy.next = hashmap[temp.next]
+            copy.random = hashmap[temp.random]
             temp = temp.next
 
         return hashmap[head]
