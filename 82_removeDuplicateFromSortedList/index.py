@@ -9,9 +9,8 @@ class Solution:
         dummy.next = head
 
         hashmap = {}
-
-        l = dummy
         temp = head
+        prev = dummy
 
         while temp:
             if temp.val in hashmap:
@@ -20,6 +19,13 @@ class Solution:
                 hashmap[temp.val] = 1
             temp = temp.next
 
-        print(hashmap)
+        temp = head
+        prev = dummy
+        while temp:
+            if hashmap[temp.val] > 1:
+                prev.next = temp.next
+            else:
+                prev = temp
+            temp = temp.next
 
-        return head
+        return dummy.next
