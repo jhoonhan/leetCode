@@ -42,5 +42,6 @@ class Solution:
                     rightSide = node
                     q.append(node.left)
                     q.append(node.right)
-            res.append(rightSide.val)
+            if rightSide:
+                res.append(rightSide.val)
         return res
