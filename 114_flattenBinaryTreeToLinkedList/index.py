@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def flatten(self, root: Optional[TreeNode]) -> None:
+    def flatten2(self, root: Optional[TreeNode]) -> None:
         """
         Do not return anything, modify root in-place instead.
         """
@@ -36,3 +36,6 @@ class Solution:
         dfs(root)
 
         return root
+
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        print("aang")
