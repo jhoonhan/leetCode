@@ -9,3 +9,30 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
+        if not root:
+            return None
+
+        def dfs(head):
+            if not head:
+                return None
+
+            left = dfs(head.left)
+            right = dfs(head.right)
+
+            # Both none
+            if left == None and right == None:
+                return head
+            # if there is left
+            if left != None:
+                head.left = None
+                head.right = left
+                temp = left
+                while temp.right:
+                    temp = temp.right
+                temp.right = right
+
+            return head
+
+        dfs(root)
+
+        return root
