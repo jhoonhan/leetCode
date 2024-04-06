@@ -19,9 +19,6 @@ class Solution:
             left = dfs(head.left)
             right = dfs(head.right)
 
-            # Both none
-            if left == None and right == None:
-                return head
             # if there is left
             if left != None:
                 head.left = None
@@ -38,4 +35,23 @@ class Solution:
         return root
 
     def flatten(self, root: Optional[TreeNode]) -> None:
-        print("aang")
+        if root == None:
+            return None
+
+        def dfs(head):
+            if not head:
+                return None
+
+            left_tail = dfs(head.left)
+            right_tail = dfs(head.right)
+
+            if head.left != None:
+                left_tail.right = head.right
+                head.right = head.left
+                head.left = None
+
+            last = right_tail or left_tail or head
+
+            return last
+
+        dfs(root)
