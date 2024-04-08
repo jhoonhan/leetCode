@@ -39,3 +39,28 @@ class Solution:
                 q.append(nei)
 
         return hashmap[1]
+
+    def cloneGraph(self, node: Optional["Node"]) -> Optional["Node"]:
+        hashmap = {}
+        visited = {}
+
+        def dfs(node):
+            if node.val in visited:
+                return
+            else:
+                visited[node.val] = True
+
+            if node.val not in hashmap:
+                hashmap[node.val] = Node(node.val)
+
+            new_node = hashmap[node.val]
+            for nei in node.neighbors:
+                if nei.val not in hashmap:
+                    hashmap[nei.val] = Node(nei.val)
+
+                new_node.neighbors.append(hashmap[nei.val])
+
+                dfs(nei)
+
+        dfs(node)
+        return hashmap[1]
