@@ -12,12 +12,14 @@ class Solution:
             "9": "wxyz",
         }
 
-        def dfs(num, acc):
-            for char in digitToChar[num]:
-                print(char)
+        def backtracK(i, acc):
+            if len(acc) == len(digits):
+                res.append(acc)
+                return
+            for char in digitToChar[digits[i]]:
+                backtracK(i + 1, acc + char)
 
-        for num in digits:
-            dfs(num, "")
+        if digits:
+            backtracK(0, "")
 
-
-Solution().letterCombinations("23")
+        return res
