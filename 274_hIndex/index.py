@@ -1,18 +1,32 @@
 class Solution:
-    def hIndex(self, citations: list) -> int:
+    def hIndex2(self, citations: list) -> int:
         citations.sort()
-        print(citations)
         length = len(citations)
 
         res = 0
         for i, n in enumerate(citations):
-            v1 = n
-            v2 = length - i
-            v3 = min(v1, v2)
-            res = max(res, v3)
+            res = max(res, min(n, length - i))
 
-        print(res)
         return res
 
+    def hIndex(self, citations: list) -> int:
 
-Solution().hIndex([1, 3, 1])
+        citations.sort()
+        citations.reverse()
+
+        l = 0
+        r = len(citations) - 1
+        while l <= r:
+            mid = l + ((r - l) // 2)
+
+            if citations[mid] == mid + 1:
+                return mid + 1
+            elif mid < citations[mid]:
+                l = mid + 1
+            else:
+                r = mid - 1
+
+        return l
+
+
+Solution().hIndex([3, 0, 6, 1, 5])
