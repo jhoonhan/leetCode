@@ -41,9 +41,4 @@ class Solution:
                     dp[r][c] = 1
                     res = max(res, 1)
 
-        print(res**2)
-
         return res**2
-
-
-Solution().maximalSquare([["1"]])
