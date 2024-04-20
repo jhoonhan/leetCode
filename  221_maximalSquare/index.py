@@ -1,22 +1,31 @@
 class Solution:
     def maximalSquare(self, matrix: list) -> int:
-        dp = [[0 for _ in range(len(matrix[0]))] for _ in range(len(matrix))]
         res = 0
+        row = len(matrix)
+        col = len(matrix[0])
 
-        for r in range(len(matrix) - 1, -1, -1):
-            for c in range(len(matrix[0]) - 1, -1, -1):
+        if row == 1 and col == 1:
+            return int(matrix[0][0])
+        elif row == 1:
+            res = int(max(matrix[0]))
+            return res
+        elif col == 1:
+            for r in range(row):
+                res = max(res, int(matrix[r][0]))
+            return res
+
+        dp = [[0 for _ in range(col)] for _ in range(row)]
+        for r in range(row):
+            dp[r][-1] = int(matrix[r][-1])
+        for c in range(col):
+            dp[-1][c] = int(matrix[-1][c])
+
+        for r in range(row - 2, -1, -1):
+            for c in range(col - 2, -1, -1):
                 curr = matrix[r][c] == "1"
-                right = (
-                    matrix[r][c + 1] == "1" if c + 1 in range(len(matrix[0])) else False
-                )
-                bottom = (
-                    matrix[r + 1][c] == "1" if r + 1 in range(len(matrix)) else False
-                )
-                diagonal = (
-                    matrix[r + 1][c + 1] == "1"
-                    if c + 1 in range(len(matrix[0])) and r + 1 in range(len(matrix))
-                    else False
-                )
+                right = matrix[r][c + 1] == "1"
+                bottom = matrix[r + 1][c] == "1"
+                diagonal = matrix[r + 1][c + 1] == "1"
 
                 dpr = dp[r][c + 1]
                 dpb = dp[r + 1][c]
@@ -32,19 +41,9 @@ class Solution:
                     dp[r][c] = 1
                     res = max(res, 1)
 
-        if res == 1:
-            return 1
-        elif res > 1:
-            return res**2
-        else:
-            return res
+        print(res**2)
+
+        return res**2
 
 
-Solution().maximalSquare(
-    [
-        ["1", "0", "1", "0", "0"],
-        ["1", "0", "1", "1", "1"],
-        ["1", "1", "1", "1", "1"],
-        ["1", "0", "0", "1", "0"],
-    ]
-)
+Solution().maximalSquare([["1"]])
