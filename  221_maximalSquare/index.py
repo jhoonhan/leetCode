@@ -1,12 +1,10 @@
 class Solution:
     def maximalSquare(self, matrix: list) -> int:
-        dp = [[0 for _ in range(len(matrix[0]) + 1)] for _ in range(len(matrix) + 1)]
+        dp = [[0 for _ in range(len(matrix[0]))] for _ in range(len(matrix))]
         res = 0
 
         for r in range(len(matrix) - 1, -1, -1):
             for c in range(len(matrix[0]) - 1, -1, -1):
-                print(r, c)
-
                 curr = matrix[r][c] == "1"
                 right = (
                     matrix[r][c + 1] == "1" if c + 1 in range(len(matrix[0])) else False
@@ -34,7 +32,6 @@ class Solution:
                     dp[r][c] = 1
                     res = max(res, 1)
 
-        print(res)
         if res == 1:
             return 1
         elif res > 1:
