@@ -1,11 +1,6 @@
-class Solution {
+class Solution:
+    def maximumTastiness(self, price: list, k: int) -> int:
+        print("aang")
 
-    /**
-     * @param Integer[] $price
-     * @param Integer $k
-     * @return Integer
-     */
-    function maximumTastiness($price, $k) {
-        
-    }
-}
+
+Solution().maximumTastiness([13, 5, 1, 8, 21, 2], 3)
