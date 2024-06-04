@@ -26,5 +26,10 @@ class Solution:
             res.append(crs)
             return True
 
+        for c in range(numCourses):
+            if not dfs(c):
+                return []
+        return res
+
 
 Solution().findOrder(2, [[1, 0], [2, 0], [3, 1], [3, 2]])
