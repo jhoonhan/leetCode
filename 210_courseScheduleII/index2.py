@@ -7,29 +7,32 @@ class Solution:
         for el in prerequisites:
             adj[el[0]].append(el[1])
 
+        visitied = set()
+        loop = set()
+
         res = []
-        visit = set()
-        cycle = set()
 
         def dfs(crs):
-            if crs in cycle:
+            if crs in loop:
                 return False
-            if crs in visit:
+            if crs in visitied:
                 return True
 
-            cycle.add(crs)
-            for pre in adj[crs]:
-                if not dfs(pre):
+            loop.add(crs)
+            for preq in adj[crs]:
+                if not dfs(preq):
                     return False
-            cycle.remove(crs)
-            visit.add(crs)
+            loop.remove(crs)
+
+            visitied.add(crs)
             res.append(crs)
             return True
 
-        for c in range(numCourses):
-            if not dfs(c):
+        for i in range(numCourses):
+            if not dfs(i):
                 return []
+
         return res
 
 
-Solution().findOrder(2, [[1, 0], [2, 0], [3, 1], [3, 2]])
+Solution().findOrder(4, [[1, 0], [2, 0], [3, 1], [3, 2]])
