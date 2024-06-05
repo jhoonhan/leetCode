@@ -13,9 +13,6 @@ class Solution:
 
             res.extend(perms)
             nums.append(n)
-
-        print(res)
-
         return res
 
 
