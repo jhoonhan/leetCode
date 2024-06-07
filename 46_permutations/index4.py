@@ -1,6 +1,7 @@
 class Solution:
     def permute(self, nums: list) -> list:
         res = []
+
         if len(nums) == 1:
             return [nums[:]]
 
@@ -11,8 +12,9 @@ class Solution:
             for perm in perms:
                 perm.append(n)
 
-            res.extend(perms)
             nums.append(n)
+            res.extend(perms)
+
         return res
 
 

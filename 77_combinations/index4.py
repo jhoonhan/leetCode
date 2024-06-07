@@ -4,7 +4,7 @@ class Solution:
 
         def backtrack(i, acc):
             if len(acc) == k:
-                res.append(acc)
+                res.append(acc[:])
                 return
             for j in range(i, n):
                 backtrack(j + 1, acc + [j + 1])
@@ -12,7 +12,6 @@ class Solution:
         backtrack(0, [])
 
         print(res)
-        return res
 
 
 Solution().combine(4, 2)
