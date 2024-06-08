@@ -20,7 +20,7 @@ class Solution:
 
         return head
 
-    def sortList(self, head):
+    def selection(self, head):
         print("god is good")
         if head == None or head.next == None:
             return head
@@ -40,3 +40,27 @@ class Solution:
 
             temp = temp.next
         return head
+
+    def sortList(self, head):
+        print("God is good")
+        if head == None or head.next == None:
+            return head
+
+        dummy = ListNode(0, head)
+        prev, cur = head, head.next
+
+        while cur:
+            if cur.val >= prev.val:
+                prev, cur = cur, cur.next
+                continue
+
+            tmp = dummy
+            while cur.val > tmp.next.val:
+                tmp = tmp.next
+
+            prev.next = cur.next
+            cur.next = tmp.next
+            tmp.next = cur
+            cur = prev.next
+
+        return dummy.next
